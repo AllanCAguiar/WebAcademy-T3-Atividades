@@ -1,0 +1,39 @@
+.container{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-auto-rows: 100px;
+    grid-template-areas: 
+    "item1 item1 item2 item2"
+    "item3 item4 item4 item4"
+    "item5 item5 item5 item5"
+    ;
+    gap: 12px;
+}
+
+.container > div{
+    border-radius: 6px;
+}
+.item1{
+    grid-area: item1;
+    background-color: darkred;
+}
+
+.item2{
+    grid-area: item2;
+    background-color: darkblue;
+}
+
+.item3{
+    grid-area: item3;
+    background-color: darkgreen;
+}
+
+.item4{
+    grid-area: item4;
+    background-color: purple;
+}
+
+.item5{
+    grid-area: item5;
+    background-color: orange;
+}
