@@ -1,0 +1,45 @@
+<body>
+    <h1>Várias listas</h1>
+    <input type="submit" id="btnAdd" value="Adicionar item">
+    <input type="text" id="itemText"><br>
+    <input type="submit" id="btnRemove" value="Remover item">
+    <div>
+      <p id="lista-titulo" name="lista">Lista de itens:</p>
+    </div>
+    
+    <ul id="lista-itens-1">
+      <li id="one" class="hot">item a</li>  
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  </body>
+  <script>
+    document.getElementById("btnRemove").style.margin= "5px 0px 0px 1px";
+    let itens = document.getElementById("lista-itens-1");
+    let btnAdd = document.getElementById("btnAdd");
+    let btnRemove = document.getElementById("btnRemove");
+    btnAdd.addEventListener("click", adicionarItem);
+    btnRemove.addEventListener("click", removerItem);
+    function adicionarItem(){
+        let entrada = document.getElementById("itemText").value;
+        if(entrada!=""){
+            let novo = document.createElement("li");
+            let texto = document.createTextNode(entrada);
+            novo.appendChild(texto);
+            itens.appendChild(novo);
+        }
+        else{
+            alert("Digite uma texto na caixa");
+        }
+    }
+    function removerItem(){
+        if(itens.children.length>0){
+            itens.removeChild(itens.lastElementChild);
+        }
+        else{
+            alert("Nenhum item para remover");
+        }
+    }
+
+  </script>

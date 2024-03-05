@@ -1,0 +1,45 @@
+<body>
+    <h1>Várias listas</h1>
+  
+    <p id="lista-titulo" name="lista">Lista de itens:</p>
+  
+    <ul class="lista-itens-1">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  
+    <ul class="lista-itens-2">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  
+    <ul class="lista-itens-3">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  
+    <ul class="lista-itens-4">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  </body>
+  <script>
+    let itensCold = document.querySelectorAll(".lista-itens-2 li");
+    console.log("Itens da lista 2");
+    itensCold.forEach(function(item){
+        console.log(item);
+    })
+    console.log("Itens da lista 2 que são hot");
+    let itensHot = document.querySelectorAll(".lista-itens-2 .hot");
+    itensHot.forEach(function(item){
+        console.log(item);
+    })
+  </script>

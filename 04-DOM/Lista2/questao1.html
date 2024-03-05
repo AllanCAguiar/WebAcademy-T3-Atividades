@@ -1,0 +1,31 @@
+<body>
+    <h1>Várias listas</h1>
+  
+    <div>
+      <p id="lista-titulo" name="lista">Lista de itens:</p>
+    </div>
+  
+    <ul id="lista-itens-1">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  </body>
+  <script>
+    let itens = document.getElementById("lista-itens-1");
+    console.log("Primeiro e último filho da lista 1");
+    console.log(itens.firstElementChild);
+    console.log(itens.lastElementChild);
+    console.log("Pai da lista 1");
+    console.log(itens.parentElement);
+    console.log("Filhos da lista 1");
+    let filhos = itens.children;
+    for(let i = 0; i<filhos.length; i++){
+        console.log(filhos[i]);
+    }
+    console.log("Irmãos da item two");
+    console.log(document.getElementById("two").previousElementSibling);
+    console.log(document.getElementById("two").nextElementSibling);
+  </script>
+  
