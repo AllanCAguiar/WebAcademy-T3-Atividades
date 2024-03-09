@@ -10,10 +10,15 @@
   <body>
     <h1>bouncing balls</h1>
         <fieldset id="info">
-            <label for="cor">Cor Favorita</label>
-            <input type="color" name="cor" id="cor"> <br>
-            <input type="submit" id="submeter">
+            <label for="cor">Cor das partículas</label>
+            <input type="color" name="cor" id="cor" value="#ffffff"> <br>
+            <label for="quant">Quantidade de partículas</label>
+            <input type="number" name="quant" id="quant" value=25> <br>
+            Forma da Partícula
+            <input type="submit" id="comecaBolas" value="Bolas">
+            <input type="submit" id="comecaQuadrados" value="Quadrados">
         </fieldset>
+        
     <canvas></canvas>
 
     <script src="main.js"></script>
