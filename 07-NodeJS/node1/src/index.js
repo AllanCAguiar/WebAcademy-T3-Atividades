@@ -5,11 +5,11 @@ const utils = require("../utils/utils")
 dotenv.config({path: `.env.${process.env.NODE_ENV}`})
 const PORT = process.env.PORT??5000;
 
-const server = http.createServer(function(req, res) {
+const server = http.createServer(function(req, res){
     let file = process.argv[2];
     if(req.url=="/"){
         fs.readdir(file, (err, files) => {
-            if (err) {
+            if(err){
                 res.writeHead(404, {'Content-Type': "text/html;charset=utf-8"});
                 res.end('Erro: Diretório não encontrado');
                 return;
@@ -21,7 +21,7 @@ const server = http.createServer(function(req, res) {
             res.end();
         });
     }
-    else if (req.url=="/favicon.ico") {
+    else if(req.url=="/favicon.ico"){
         res.writeHead(204);
         res.end();
         return;
@@ -29,7 +29,7 @@ const server = http.createServer(function(req, res) {
     else{
         let fileName = "public/" + req.url.slice(1);
         fs.readFile(fileName, (err, file) => {
-            if (err) {
+            if(err){
                 res.writeHead(404, { 'Content-Type': "text/html;charset=utf-8" });
                 res.end('Erro: Não foi possível ler o arquivo');
                 return;
