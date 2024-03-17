@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.centro {
+    text-align: center;
+}
+
+.centro form {
+    display: inline-block;
+}
+
+.texto {
+    text-align: center;
+    font-size: large;
+}
