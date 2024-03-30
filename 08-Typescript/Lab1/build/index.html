@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lembretes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <!-- gerenciar produtos -->
+    <div class="container mt-5" >
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNovaTarefa">Nova Tarefa</button>
+        <table class="table table-striped mt-2" id="tabelaTarefas">
+            <thead>
+                    <th scope="col" class="">Feito</th>
+                    <th scope="col" class="col-3">Título</th>
+                    <th scope="col" class="col-2">Data de Criação</th>
+                    <th scope="col" class="col-2">Data Limite</th>
+                    <th scope="col" class="col-3">Descrição</th>
+                    <th scope="col" class="col-3">Ações</th>
+            </thead>
+            <tbody>
+                <tr class="align-middle" id="tarefa1">
+                    <td>
+                        <input class="form-check-input" type="checkbox"> 
+                    </td>
+                    <td>Pagar Contas</td>
+                    <td>31/01/2024, 12:00:00</td>
+                    <td>29/02/2024</td>
+                    <td>
+                        <textarea class="form-control" style="resize: none;" rows="1" readonly > Contas de luz e água</textarea>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btnEditar" data-bs-toggle="modal" data-bs-target="#modalEditarTarefa"  data-tr-id="tarefa1">Editar </button>
+                        <button type="button" class="btn btn-secondary btnExcluir" data-tr-id="tarefa1">Excluir </button>
+                    </td>
+                </tr>
+                <tr class="align-middle" id="tarefa2">
+                    <td><input class="form-check-input" type="checkbox"> </td>
+                    <td>Consertar Telhado</td>
+                    <td>01/02/2024, 18:00:00</td>
+                    <td></td>
+                    <td >
+                        <textarea class="form-control" style="resize: none;" rows="1" readonly ></textarea>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btnEditar " data-bs-toggle="modal" data-bs-target="#modalEditarTarefa" data-tr-id="tarefa2">Editar </button>
+                        <button type="button" class="btn btn-secondary btnExcluir" data-tr-id="tarefa2">Excluir </button>
+                    </td>
+                </tr>
+                <tr class="align-middle" id="tarefa3">
+                    <td><input class="form-check-input" type="checkbox"> </td>
+                    <td>Limpar Banheiro</td>
+                    <td>01/01/2024, 06:00:00</td>
+                    <td></td>
+                    <td >
+                        <textarea class="form-control" style="resize: none;" rows="1" readonly ></textarea>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btnEditar " data-bs-toggle="modal" data-bs-target="#modalEditarTarefa" data-tr-id="tarefa3">Editar </button>
+                        <button type="button" class="btn btn-secondary btnExcluir" data-tr-id="tarefa3">Excluir </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- gerenciar produtos -->
+
+    <!-- modal criar tarefa -->
+    <div class="modal" id="modalNovaTarefa" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nova tarefa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="post" id="formNovaTarefa">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="titulo" required>              
+                        <label for="limite" class="form-label mt-3">Data Limite</label>
+                        <input type="date" class="form-control" id="limite">
+                        <label for="descricao" class="form-label mt-3">Descrição</label>
+                        <input type="text" class="form-control" id="descricao" >
+                        <button type="submit" class="btn btn-success w-100 mt-3">Criar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal criar tarefa -->
+
+    <!-- modal editar tarefa -->
+    <div class="modal" id="modalEditarTarefa" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar tarefa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="post" id="formEditarTarefa">
+                        <label for="tituloEditar" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="tituloEditar" required>              
+                        <label for="limiteEditar" class="form-label mt-3">Data Limite</label>
+                        <input type="date" class="form-control" id="dataLimiteEditar">
+                        <label for="descricaoEditar" class="form-label mt-3">Descrição</label>
+                        <input type="text" class="form-control" id="descricaoEditar" >
+                        <button type="submit" class="btn btn-success w-100 mt-3">Salvar alterações</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal editar tarefa -->
+
+    <script src="js/main.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>
