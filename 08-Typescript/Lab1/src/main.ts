@@ -1,4 +1,4 @@
-type Tarefa = [string, Date, Date, string?];
+type Tarefa = [string, Date, Date?, string?];
 let cont=4
 
 document.addEventListener("DOMContentLoaded", function() {
