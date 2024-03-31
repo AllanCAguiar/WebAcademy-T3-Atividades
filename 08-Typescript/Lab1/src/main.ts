@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         const tr = document.getElementById(id);
         if (tr) {
+            // Passsando id para o formulario
             const modalEditar = document.querySelector('#modalEditarTarefa');
             modalEditar?.setAttribute("data-tr-id", id);
             const tds = tr.querySelectorAll('td');
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const dataLimite = tds[3].textContent?.trim();
             const descricao = tds[4].querySelector('textarea')?.value.trim();
             
-            // Passando os valores atuais para edição
+            // Passando os valores atuais para o formulario
             const tituloEditarInput = document.getElementById('tituloEditar') as HTMLInputElement;
             if (titulo !== undefined) {
                 tituloEditarInput.value = titulo;
@@ -31,9 +32,9 @@ document.addEventListener("DOMContentLoaded", function() {
             else {
                 tituloEditarInput.value = '';
             }
-    
             const dataLimiteEditarInput = document.getElementById('dataLimiteEditar') as HTMLInputElement;
             if (dataLimite !== undefined) {
+                // Tratamento do formata da data
                 let dataLimiteParts = dataLimite.split('/');
                 let dataLimiteFormatada = dataLimiteParts[2] + '-' + dataLimiteParts[1] + '-' + dataLimiteParts[0]; 
                 dataLimiteEditarInput.value = dataLimiteFormatada;
@@ -41,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function() {
             else {
                 dataLimiteEditarInput.value = '';
             }
-    
             const descricaoEditarInput = document.getElementById('descricaoEditar') as HTMLInputElement;
             if (descricao !== undefined) {
                 descricaoEditarInput.value = descricao;
@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 descricaoEditarInput.value = '';
             }
         }
-
     }
 
     function ExcluirButtonClick(btn: HTMLButtonElement) {
@@ -70,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Adicionando eventos nos botões
+    // Adicionando eventos nos botões iniciais
     btnEditarList.forEach(function(btn) {
         btn.addEventListener('click', function() {
             EditarButtonClick(btn as HTMLButtonElement);
@@ -89,21 +88,20 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     
-    // Adiciona uma nova tarefa
+    // Evento do formulario de criação
     formAdicao.addEventListener("submit", function(event) {
         event.preventDefault();
-        
         let titulo = (document.getElementById("titulo") as HTMLInputElement).value;
         let limite = new Date((document.getElementById("limite") as HTMLInputElement).value);
         let descricao = (document.getElementById("descricao") as HTMLInputElement).value;
         let dataAtual = new Date();
         let novaTarefa: Tarefa;
-
         novaTarefa = [titulo, dataAtual, limite, descricao];
         let nova = document.createElement("tr");
         nova.classList.add("align-middle");
         nova.id="tarefa"+cont
-        // Construir o conteúdo da nova linha
+
+        // Construindo o conteúdo da nova linha
         nova.innerHTML = `
             <td><input class="form-check-input" type="checkbox"></td>
             <td>${novaTarefa[0]}</td>
@@ -120,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Adicionar a nova linha à tabela
         tabela.querySelector("tbody")?.appendChild(nova);
         
-        // Adicionando os eventos  
+        // Adicionando os eventos   
         btnEditarList = document.querySelectorAll('.btnEditar');
         btnExcluirList = document.querySelectorAll('.btnExcluir');
         const novoBotaoEditar = nova.querySelector('.btnEditar');
@@ -144,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
         modalBackdrop.parentNode?.removeChild(modalBackdrop);        
     });
 
-    // Editando uma tarefa
+    // Evento do formulario de edição
     formEdicao.addEventListener("submit", function(event) {
         event.preventDefault();
         const tituloCampo = (document.getElementById("tituloEditar") as HTMLInputElement);
@@ -160,6 +158,7 @@ document.addEventListener("DOMContentLoaded", function() {
             tds[1].textContent=titulo;
             console.log(limite);
             if(limite!==""){
+                // Tratamento do formata da data
                 let dataLimiteParts = limite.split('-');
                 let dataLimiteFormatada = dataLimiteParts[2] + '/' + dataLimiteParts[1] + '/' + dataLimiteParts[0]; 
                 tds[3].textContent = dataLimiteFormatada;
@@ -173,7 +172,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
         
-
         // Para fechar o modal
         const modalElement = document.getElementById("modalEditarTarefa") as HTMLElement;
         modalElement.style.display = "none";
