@@ -2,8 +2,21 @@ type Tarefa = [string, Date, Date?, string?];
 let cont=4
 
 document.addEventListener("DOMContentLoaded", function() {
+    // Adicionando eventos nos botões iniciais
     let btnEditarList = document.querySelectorAll('.btnEditar');
     let btnExcluirList = document.querySelectorAll('.btnExcluir');
+    btnEditarList.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            EditarButtonClick(btn as HTMLButtonElement);
+        });
+    });
+    
+    btnExcluirList.forEach(function(btn) {
+        btn.addEventListener('click', function(event) {
+            ExcluirButtonClick(btn as HTMLButtonElement);
+        });
+    });
+    
     const formAdicao = document.getElementById("formNovaTarefa") as HTMLFormElement;
     const formEdicao = document.getElementById("formEditarTarefa") as HTMLFormElement;
     const tabela = document.getElementById("tabelaTarefas") as HTMLTableElement;
@@ -69,25 +82,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Adicionando eventos nos botões iniciais
-    btnEditarList.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            EditarButtonClick(btn as HTMLButtonElement);
-        });
-    });
-    
-    btnExcluirList.forEach(function(btn) {
-        let id: string = "";
-        const dataTrId = btn.getAttribute("data-tr-id");
-        if (dataTrId !== null) {
-            id = dataTrId;
-        }
-        btn.addEventListener('click', function(event) {
-            ExcluirButtonClick(btn as HTMLButtonElement);
-        });
-    });
-
-    
     // Evento do formulario de criação
     formAdicao.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -119,8 +113,6 @@ document.addEventListener("DOMContentLoaded", function() {
         tabela.querySelector("tbody")?.appendChild(nova);
         
         // Adicionando os eventos   
-        btnEditarList = document.querySelectorAll('.btnEditar');
-        btnExcluirList = document.querySelectorAll('.btnExcluir');
         const novoBotaoEditar = nova.querySelector('.btnEditar');
         const novoBotaoExcluir = nova.querySelector('.btnExcluir');
         novoBotaoEditar?.addEventListener('click', function() {
