@@ -228,11 +228,8 @@ document.addEventListener("DOMContentLoaded", function() {
             ExcluirButtonClick(novoBotaoExcluir as HTMLButtonElement);
         });
         
-        // Apagando os valores do formulario
-        (document.getElementById("nome") as HTMLInputElement).value = "";
-        (document.getElementById("idade") as HTMLInputElement).value = "";
-        (document.getElementById("altura") as HTMLInputElement).value = "";
-        (document.getElementById("peso") as HTMLInputElement).value = "";
+        // Limpando os campos do formulário
+        (document.getElementById("formNovoAluno") as HTMLFormElement).reset();
         
         // Atualizando estasticas na página
         document.getElementById("numAlunos")!.innerText = turma.getNumAlunos().toString();
