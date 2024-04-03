@@ -37,7 +37,7 @@ class carrinhodeCampos<T extends Produto> {
     mostrarEstatisticas() {
         const estatisticas = document.getElementById('estatisticas');
         if (estatisticas) {
-            estatisticas.innerHTML = `<p>Quantidade de itens: ${this.getNumItens()} <br> Valor Total: R$ ${this.getValorTotal().toFixed(2)}</p>`;
+            estatisticas.innerHTML = `<p>Quantidade de itens: ${this.getNumItens()} <br> Valor Total: R$${this.getValorTotal().toFixed(2)}</p>`;
         }
     }
 }
@@ -131,12 +131,18 @@ class Bicicleta implements Produto {
 function removerProduto(botao: HTMLAnchorElement) {
     const id = botao.id;
     const produto = document.getElementById(id);
-    produto?.remove();
-
-    // Atualiza estatisticas
-    carrinho.removerProduto(parseInt(id.slice(7)));
-    carrinho.mostrarEstatisticas();
+    const confirmacao = confirm(`Tem certeza que deseja apagar?`);
+    if(confirmacao){
+        // Removendo elemento html
+        produto?.remove();
+        // Atualizando estatisticas
+        carrinho.removerProduto(parseInt(id.slice(7)));
+        carrinho.mostrarEstatisticas();
+    }
 }
+    
+
+    
 
 // Função para criar o html do produto TV
 function criarCardTV(produto: TV) {
@@ -151,7 +157,7 @@ function criarCardTV(produto: TV) {
                 <p class="card-text"><strong>Resolução:</strong> ${produto.getResolucao()}</p>
                 <p class="card-text"><strong>Tamanho: </strong>${produto.getTamanho()}</p>
                 <p class="card-text"><strong>Fabricante:</strong> ${produto.getFabricante()}</p>
-                <p class="card-text"><strong>Preço:</strong> ${produto.getValor()}</p>
+                <p class="card-text"><strong>Preço:</strong> R$${produto.getValor().toFixed(2)}</p>
                 <a href="#" id="produto${produto.getID()}" class="btn btn-danger w-100 mt-auto" onclick="removerProduto(this)">Remover</a>
             </div>
         </div>
@@ -172,7 +178,7 @@ function criarCardCelular(produto: Celular) {
                 <p class="card-text"><strong>Modelo: </strong>${produto.getModelo()}</p>
                 <p class="card-text"><strong>Mémoria:</strong> ${produto.getMemoria()}GB</p>
                 <p class="card-text"><strong>Fabricante:</strong> ${produto.getFabricante()}</p>
-                <p class="card-text"><strong>Preço:</strong> ${produto.getValor()}</p>
+                <p class="card-text"><strong>Preço:</strong> R$${produto.getValor().toFixed(2)}</p>
                 <a href="#" id="produto${produto.getID()}" class="btn btn-danger w-100 mt-auto" onclick="removerProduto(this)">Remover</a>
             </div>
         </div>
@@ -193,7 +199,7 @@ function criarCardBicicleta(produto: Bicicleta) {
                 <p class="card-text"><strong>Modelo: </strong>${produto.getModelo()}</p>
                 <p class="card-text"><strong>Tamanho do Aro:</strong> ${produto.getTamanhoAro()}GB</p>
                 <p class="card-text"><strong>Fabricante:</strong> ${produto.getFabricante()}</p>
-                <p class="card-text"><strong>Preço:</strong> ${produto.getValor()}</p>
+                <p class="card-text"><strong>Preço:</strong> R$${produto.getValor().toFixed(2)}</p>
                 <a href="#" id="produto${produto.getID()}" class="btn btn-danger w-100 mt-auto" onclick="removerProduto(this)">Remover</a>
             </div>
         </div>
