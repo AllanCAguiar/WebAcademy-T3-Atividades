@@ -1,5 +1,5 @@
 export interface Technology {
-    name: string,
-    type: string,
-    poweredByNodejs: boolean
+  name: string;
+  type: string;
+  poweredByNodejs: boolean;
 }
