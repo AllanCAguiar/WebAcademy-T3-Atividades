@@ -8,14 +8,14 @@ const index = (req: Request, res: Response) => {
 };
 
 const hb1 = (req: Request, res: Response) => {
-  res.render("hb1", {
+  res.render("main/hb1", {
     mensagem: "Olá, você está aprendendo Express + HBS!",
     layout: "main"
   });
 };
 
 const hb2 = (req: Request, res: Response) => {
-  res.render("hb2", {
+  res.render("main/hb2", {
     poweredByNodejs: true,
     name: "Express",
     type: "Framework",
@@ -30,7 +30,7 @@ const hb3 = (req: Request, res: Response) => {
     { nome: "Edleno Moura", sala: 1236 },
     { nome: "Elaine Harada", sala: 1231 }
   ];
-  res.render("hb3", { profes, layout: "main" });
+  res.render("main/hb3", { profes, layout: "main" });
 };
 
 const hb4 = (req: Request, res: Response) => {
@@ -44,7 +44,7 @@ const hb4 = (req: Request, res: Response) => {
     { name: "Sequelize", type: "ORM tool", poweredByNodejs: true }
   ];
 
-  res.render("hb4", { technologies, layout: "main" });
+  res.render("main/hb4", { technologies, layout: "main" });
 };
 
 const lorem = (req: Request, res: Response) => {

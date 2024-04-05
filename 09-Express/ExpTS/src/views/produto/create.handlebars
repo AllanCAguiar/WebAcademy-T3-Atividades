@@ -1,0 +1,22 @@
+<h4>Criação de Produto</h4>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <form action="/produto/create" method="post">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" name="nome" />
+        <label for="preco" class="form-label">Preço</label>
+        <input
+          type="number"
+          class="form-control"
+          id="preco"
+          name="preco"
+          step="0.01"
+        />
+        <label for="estoque" class="form-label">Estoque</label>
+        <input type="number" class="form-control" id="estoque" name="estoque" />
+        <button type="submit" class="btn btn-success mt-3">Criar</button>
+      </form>
+    </div>
+  </div>
+</div>

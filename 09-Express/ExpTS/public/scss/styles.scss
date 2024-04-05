@@ -1,5 +1,13 @@
-$color: orange;
+$orange: rgb(215, 124, 38);
 
 h4 {
-    color: $color;
+    color: $orange;
+}
+
+a {
+    color: black;
+}
+
+th:last-child, td:last-child {
+    text-align: right;
 }

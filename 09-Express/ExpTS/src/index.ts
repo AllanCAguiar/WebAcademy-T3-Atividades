@@ -39,8 +39,8 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
-app.set("views", `${__dirname}/views/main`);
-
+app.set("views", `${__dirname}/views/`);
+app.use(express.urlencoded({ extended: false }));
 app.use(router);
 
 app.listen(PORT, () => {
