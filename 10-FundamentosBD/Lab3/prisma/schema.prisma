@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  cpf             String       @id @db.Char(11)
+  nome_completo   String       @db.VarChar(200)
+  num_celular     String       @unique @db.Char(11)
+  email           String       @unique @db.VarChar(200)
+  data_nascimento DateTime     @db.Date
+  endereco        Endereco[]
+}
+
+model Produto {
+  modelo       String  @id @db.VarChar(45)
+  categoria    String  @db.VarChar(45)
+  subcategoria String  @db.VarChar(45)
+  fabricante   String  @db.VarChar(45)
+  preco        Decimal @db.Decimal(10, 2)
+  quantidade   Int      
+  numeroserie  NumeroSerie[]
+  lista_de_compras ComprasLista[]
+}
+
+model NumeroSerie {
+  modelo       String  @db.VarChar(45)
+  numero_serie String  @db.VarChar(45)
+  produto      Produto @relation(fields: [modelo], references: [modelo])
+  @@id([modelo, numero_serie])
+}
+
+model Endereco {
+  id_endereco    Int       @id @default(autoincrement())
+  cpf_cliente    String    @db.Char(11)
+  estado         String    @db.VarChar(45)
+  cidade         String    @db.VarChar(45)
+  cep            String    @db.Char(8)
+  num_residencia String    @db.Char(5)
+  cliente        Cliente   @relation(fields: [cpf_cliente], references: [cpf])
+  compras        Compra[]
+}
+
+model Compra {
+  id              Int           @id @default(autoincrement())
+  data            DateTime      @db.Date      
+  hora            DateTime      @db.Time()
+  desconto        Decimal       @db.Decimal(4,2) @default(0.00)
+  forma_pagamento String        @db.VarChar(45)
+  total           Decimal       @db.Decimal(11,2)
+  endereco_id     Int 
+  endereco        Endereco      @relation(fields: [endereco_id], references: [id_endereco])
+  lista_de_compras ComprasLista[]
+}
+
+
+model ComprasLista {
+  idCompra        Int          
+  modelo          String    @db.VarChar(45)
+  quantidade      Int
+  preco_unitario  Decimal   @db.Decimal(10,2)
+  compra          Compra    @relation(fields: [idCompra], references: [id])
+  produto         Produto   @relation(fields: [modelo], references: [modelo])
+  @@id([idCompra, modelo])
+}
