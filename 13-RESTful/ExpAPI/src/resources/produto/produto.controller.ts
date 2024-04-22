@@ -2,15 +2,20 @@ import { Request, Response } from "express";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import {
   createProduto,
-  checkNomeIsAvaliable,
+  checkNomeIsAvailable,
   listProdutos,
   readProduto,
+  updateProduto,
+  deleteProduto,
+  checkAllNomeIsAvailable,
 } from "./produto.service";
-import { CreateProdutoDto } from "./produto.types";
+import { CreateProdutoDto, UpdateProdutoDto } from "./produto.types";
 
 const index = async (req: Request, res: Response) => {
+  const skip = req.query.skip ? parseInt(req.query.skip.toString()) : undefined;
+  const take = req.query.take ? parseInt(req.query.take.toString()) : undefined;
   try {
-    const produtos = await listProdutos();
+    const produtos = await listProdutos(skip, take);
     res.status(StatusCodes.OK).json(produtos);
   } catch (err) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -20,7 +25,7 @@ const index = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   const produto = req.body as CreateProdutoDto;
   try {
-    if (await checkNomeIsAvaliable(produto.nome)) {
+    if (await checkAllNomeIsAvailable(produto.nome)) {
       const novoProduto = await createProduto(produto);
       res.status(StatusCodes.CREATED).json(novoProduto);
     } else {
@@ -43,8 +48,29 @@ const read = async (req: Request, res: Response) => {
   }
 };
 
-const update = async (req: Request, res: Response) => {};
+const update = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const produto = req.body as UpdateProdutoDto;
+  try {
+    if (await checkNomeIsAvailable(produto.nome, id)) {
+      const updatedProduto = await updateProduto(id, produto);
+      res.status(StatusCodes.NO_CONTENT).json();
+    } else {
+      res.status(StatusCodes.CONFLICT).json(ReasonPhrases.CONFLICT);
+    }
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
+};
 
-const remove = async (req: Request, res: Response) => {};
+const remove = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const deletedProduto = await deleteProduto(id);
+    res.status(StatusCodes.NO_CONTENT).json();
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
+};
 
 export default { index, create, read, update, remove };
