@@ -1,6 +1,6 @@
-import express, { Request, Response} from "express";
+import express, { Request, Response } from "express";
 import dotenv from "dotenv";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 import router from "./router";
 import validateEnv from "./utils/validateEnv";
 import setCookieLang from "./middlewares/setLangCookie";

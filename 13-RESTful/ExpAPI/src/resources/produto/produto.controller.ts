@@ -7,7 +7,6 @@ import {
   readProduto,
   updateProduto,
   deleteProduto,
-  checkAllNomeIsAvailable,
 } from "./produto.service";
 import { CreateProdutoDto, UpdateProdutoDto } from "./produto.types";
 
@@ -25,7 +24,7 @@ const index = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   const produto = req.body as CreateProdutoDto;
   try {
-    if (await checkAllNomeIsAvailable(produto.nome)) {
+    if (await checkNomeIsAvailable(produto.nome)) {
       const novoProduto = await createProduto(produto);
       res.status(StatusCodes.CREATED).json(novoProduto);
     } else {

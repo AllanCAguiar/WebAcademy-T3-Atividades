@@ -1,3 +1,3 @@
 export type ChangeLangDto = {
-    lang: "pt-BR"|"en-US"
-}
+  lang: "pt-BR" | "en-US";
+};

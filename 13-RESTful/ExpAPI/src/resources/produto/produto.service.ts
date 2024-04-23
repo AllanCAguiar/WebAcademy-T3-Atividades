@@ -6,15 +6,12 @@ const prisma = new PrismaClient();
 
 export const checkNomeIsAvailable = async (
   nome: string,
-  id: string,
+  ignoreID?: string,
 ): Promise<boolean> => {
-  return !(await prisma.produto.findUnique({ where: { id: id, nome: nome } }));
-};
-
-export const checkAllNomeIsAvailable = async (
-  nome: string,
-): Promise<boolean> => {
-  return !(await prisma.produto.findUnique({ where: { nome: nome } }));
+  const produto = await prisma.produto.findUnique({ where: { nome } });
+  if (!produto) return true;
+  if (ignoreID && produto.id === ignoreID) return true;
+  return false;
 };
 
 export const createProduto = async (

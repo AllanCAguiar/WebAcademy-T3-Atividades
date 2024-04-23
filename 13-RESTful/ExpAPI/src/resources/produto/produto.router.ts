@@ -1,7 +1,7 @@
 import { Router } from "express";
 import produtoController from "./produto.controller";
 import validateBody from "../../middlewares/validateBody";
-import produtoSchema from "./produto.schemas";
+import { produtoSchema } from "./produto.schemas";
 
 const router = Router();
 
