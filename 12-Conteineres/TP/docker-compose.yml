@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  backend:
+    container_name: backend
+    build: ./livros-backend-main
+    ports:
+      - 4444:4444
+    env_file:
+      - ./livros-backend-main/.env
+    depends_on:
+      - mysql
+    volumes:
+      - ./livros-backend-main/log:/log
+
+  frontend:
+    container_name: frontend
+    build: ./livros-frontend-main
+    ports:
+      - 8000:80
+    env_file:
+      - ./livros-frontend-main/.env
+  
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    volumes:
+      - vol_mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: webacad123
+      MYSQL_DATABASE: biblioteca
+      MYSQL_USER: allan
+      MYSQL_PASSWORD: allan123
+
+volumes:
+  vol_mysql:
