@@ -2,8 +2,9 @@ version: '3.8'
 
 services:
   backend:
-    container_name: backend
-    build: ./livros-backend-main
+    container_name: backend_biblioteca
+    build:
+      context: ./livros-backend-main  
     ports:
       - 4444:4444
     env_file:
@@ -14,10 +15,18 @@ services:
       - ./livros-backend-main/log:/log
     networks:
       - rede_bd
+    healthcheck:
+      test: curl --fail http://localhost:3306 || exit
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 0s
 
   frontend:
-    container_name: frontend
-    build: ./livros-frontend-main
+    container_name: frontend_biblioteca
+      
+    build: 
+      context: ./livros-frontend-main
     ports:
       - 8000:80
     env_file:
@@ -26,7 +35,7 @@ services:
       - rede_bd
   
   mysql:
-    container_name: mysql
+    container_name: db_biblioteca
     image: mysql:latest
     ports:
       - 3306:3306
@@ -42,7 +51,7 @@ services:
       - rede_bd
 
   bd_gui:
-    container_name: bd_gui
+    container_name: bd_gui_biblioteca
     image: phpmyadmin:latest
     ports:
       - 8080:80
