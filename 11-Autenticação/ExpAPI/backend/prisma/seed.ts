@@ -4,16 +4,16 @@ import { TiposUsuarios} from "../src/resources/tipoUsuario/tipoUsuario.constants
 const prisma = new PrismaClient();
 
 const seed = async () => {
-    prisma.tipoUsuario.createMany({ data: [
-        { id: TiposUsuarios.ADMIN, rotulo: 'admin'},
-        { id: TiposUsuarios.CLIENT, rotulo: 'client'}
+    await prisma.tipoUsuario.createMany({ data: [
+        { id: TiposUsuarios.ADMIN, rotulo: "admin"},
+        { id: TiposUsuarios.CLIENT, rotulo: "client"}
     ]})
 }
 
-seed().then(() => {
-    prisma.$disconnect();
+seed().then(async() => {
+    await prisma.$disconnect();
 })
-.catch((err) => {
+.catch(async(err) => {
     console.log(err);
-    prisma.$disconnect();
+    await prisma.$disconnect();
 })

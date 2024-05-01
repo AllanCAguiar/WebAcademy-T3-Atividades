@@ -8,8 +8,8 @@
     "start:prod": "node build/index.js",
     "build": "npx tsc",
     "format": "npx prettier --write src/",
-    "migrate": "docker exec backend_loja npx prisma migrate dev",
-    "seed": "docker exec backend_loja npx prisma db seed"
+    "migrate": "docker exec -it backend_loja npx prisma migrate dev",
+    "seed": "docker exec -it backend_loja npx prisma db seed"
   },
   "keywords": [],
   "author": "",
