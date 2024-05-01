@@ -22,7 +22,7 @@ class LivroDTOMapper extends ObjectMapper<Livro, LivroDTO> {
      * origem {@link Livro} para um objeto 
      * de destino {@link LivroDTO}.
      */
-    public async mapearOrigemParaDestino(modelo: Livro): Promise<LivroDTO> {
+    public async mapear(modelo: Livro): Promise<LivroDTO> {
         return {
             nome: modelo.nome,
             sinopse: modelo.sinopse,

@@ -28,11 +28,11 @@ abstract class ObjectMapper<K, V> {
      * @param {K[]} listaOrigem Lista de objetos de origem.
      * @return {V[]} Lista de objetos de destino mapeados.
      */
-    public async mapearListaOrigemParaListaDestino(listaOrigem: K[]): Promise<V[]> {
+    public async mapearLista(listaOrigem: K[]): Promise<V[]> {
         const listaDestino: V[] = [];
 
         for(let origem of listaOrigem){
-            const destino = await this.mapearOrigemParaDestino(origem);
+            const destino = await this.mapear(origem);
             listaDestino.push(destino);
         }
 
@@ -48,7 +48,7 @@ abstract class ObjectMapper<K, V> {
      * @param {K} origem Objeto de origem.
      * @return {V} Objeto de destino mapeado.
      */
-    public abstract mapearOrigemParaDestino(origem: K): Promise<V>;
+    public abstract mapear(origem: K): Promise<V>;
 
 }
 

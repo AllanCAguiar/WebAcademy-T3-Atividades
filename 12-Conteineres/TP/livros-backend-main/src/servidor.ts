@@ -2,7 +2,6 @@ import "reflect-metadata";
 
 import { app } from "@/app";
 import { Logger } from "@/common/Logger";
-import { gerarConexaoBDSequelize } from "@/infraestrutura/bd";
 
 import { createServer, Server } from "node:http";
 
@@ -19,12 +18,10 @@ const iniciarAplicacao = async (): Promise<void> => {
     const servidor: Server = createServer(app);
 
     try{
-        const conexao = await gerarConexaoBDSequelize();
-        await conexao.sync();
         servidor.listen(porta, () => logger.info(`SERVIDOR RODANDO VIOLENTAMENTE NA PORTA ${porta}.`));
     }catch(erro: any){
         logger.error(erro);
-        process.exit(1);
+        process.exit(130);
     }
 };
 

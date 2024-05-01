@@ -1,45 +1,42 @@
-import { Dotenv } from "@/common/Dotenv";
+import { PrismaClient, Prisma } from "@prisma/client";
+
 import { Logger } from "@/common/Logger";
-import { Livro } from "@/dominio/modelos/Livro";
-
-import { Dialect } from "sequelize";
-import { Sequelize } from "sequelize-typescript";
-
-Dotenv.carregarVariaveis();
 
 /**
  * 
  * Função que gera uma nova conexão com o 
  * banco de dados através de uma instância
- * {@link Sequelize}.
+ * {@link PrismaClient}.
  * 
  * @returns Conexão com o banco de dados.
  * @author Linnik Maciel <linnik.souza123@gmail.com>
  */
-const gerarConexaoBDSequelize = async (): Promise<Sequelize> => {
+const gerarConexaoBDPrisma = (): PrismaClient => {
     const logger = Logger.pegarInstancia();
-    const {
-        BD_DIALETO,
-        BD_ENDERECO,
-        BD_PORTA,
-        BD_BANCODEDADOS,
-        BD_USUARIO,
-        BD_SENHA
-    } = process.env;
-    const conexao = new Sequelize(
-        BD_BANCODEDADOS as string, 
-        BD_USUARIO as string, 
-        BD_SENHA, 
-        {
-            host: BD_ENDERECO,
-            port: ((BD_PORTA as string) as unknown) as number,
-            dialect: BD_DIALETO as Dialect,
-            models: [Livro],
-            logging: logger.info.bind(logger)
-        }
-    );
+    const conexao = new PrismaClient({
+        log: [
+            {
+                emit: "event",
+                level: "query"
+            },
+            {
+                emit: "event",
+                level: "error"
+            }
+        ]
+    });
+
+    conexao.$on("query", (e: Prisma.QueryEvent): void => {
+        logger.info(`Query: ${e.query}`);
+        logger.info(`Params: ${e.params}`);
+        logger.info(`Duracao: ${e.duration}ms`);
+    });
+    conexao.$on("error", (e: Prisma.LogEvent): void => {
+        logger.error(e.message);
+        logger.error(e.target);
+    });
 
     return conexao;
 };
 
-export { gerarConexaoBDSequelize };
+export { gerarConexaoBDPrisma };

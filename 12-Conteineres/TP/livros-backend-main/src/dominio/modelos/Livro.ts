@@ -1,11 +1,20 @@
-import {
-    Column,
-    DataType,
-    Length,
-    Model,
-    NotNull,
-    Table
-} from "sequelize-typescript";
+import { ValidadorLivro } from "../validacoes/ValidadorLivro";
+
+/**
+ * 
+ * Tipagem que define os parâmetros para criação
+ * de um objeto de modelo de livro.
+ * 
+ * @author Linnik Maciel <linnik.souza123@gmail.com>
+ */
+type LivroParams = {
+    id: string;
+    nome: string;
+    sinopse: string;
+    isbn: string;
+    urlImagem?: string;
+    autores: string[];
+};
 
 /**
  * 
@@ -14,89 +23,80 @@ import {
  * 
  * @author Linnik Maciel <linnik.souza123@gmail.com>
  */
-@Table({
-    tableName: "livros",
-    timestamps: false
-})
-class Livro extends Model {
+class Livro {
 
-    @Column({
-        field: "id",    
-        type: DataType.UUID,
-        defaultValue: DataType.UUIDV4(),
-        primaryKey: true,
-    })
-    id?: string;
+    private _id: string;
+    private _nome: string;
+    private _sinopse: string;
+    private _isbn: string;
+    private _urlImagem?: string;
+    private _autores: string[];
 
-    @Column({
-        field: "nome",
-        type: DataType.STRING(180),
-        allowNull: false,
-        validate: {
-            len: {
-                args: [20, 180],
-                msg: "O nome do livro deve ter entre 20 e 180 caracteres."
-            }
-        }
-    })
-    nome!: string;
+    public constructor(params: LivroParams){
+        this.validar(params);
 
-    @Column({
-        field: "sinopse",
-        type: DataType.TEXT,
-        allowNull: false,
-        validate: {
-            notEmpty: {
-                msg: "A sinopse não pode ficar em branco."
-            },
-            notNull: {
-                msg: "A sinopse não pode ser nula."
-            },
-        }
-    })
-    sinopse!: string;
+        this._id = params.id;
+        this._nome = params.nome;
+        this._sinopse = params.sinopse;
+        this._isbn = params.isbn;
+        this._urlImagem = params.urlImagem;
+        this._autores = params.autores;
+    }
 
-    @Column({
-        field: "isbn",
-        type: DataType.STRING(13),
-        allowNull: false,
-        unique: true,
-        validate: {
-            len: {
-                args: [13, 13],
-                msg: "O código ISBN deve ser formado por 13 caracteres."
-            }
-        }
-    })
-    isbn!: string;
+    public get id(): string {
+        return this._id;
+    }
 
-    @Column({
-        field: "url_imagem",
-        type: DataType.TEXT,
-        allowNull: true,
-        validate: {
-            isUrl: {
-                msg: "A URL da imagem deve ser uma URL válida."
-            }
-        }
-    })
-    urlImagem!: string;
+    public get nome(): string {
+        return this._nome;
+    }
 
-    @Column({
-        field: "autores",
-        type: DataType.JSON,
-        allowNull: false,
-        validate: {
-            notEmpty: {
-                msg: "O livro deve ter pelo menos um autor."
-            },
-            notNull: {
-                msg: "O livro deve ter pelo menos um autor."
-            }
-        }
-    })
-    autores!: string[];
+    public set nome(novoNome: string){
+        this._nome = novoNome;
+    }
 
+    public get sinopse(): string {
+        return this._sinopse;
+    }
+
+    public set sinopse(novaSinopse: string){
+        this._sinopse = novaSinopse;
+    }
+
+    public get isbn(): string {
+        return this._isbn;
+    }
+
+    public set isbn(novoIsbn: string){
+        this._isbn = novoIsbn;
+    }
+
+    public get urlImagem(): string | undefined {
+        return this._urlImagem;
+    }
+
+    public set urlImagem(novaUrlImagem: string | undefined){
+        this._urlImagem = novaUrlImagem;
+    }
+
+    public get autores(): string[] {
+        return this._autores;
+    }
+
+    public set autores(novosAutores: string[]){
+        this._autores = novosAutores;
+    }
+
+    private validar(params: LivroParams): void {
+        const validador = ValidadorLivro.instanciar();
+
+        validador
+            .nome(params.nome)
+            .sinopse(params.sinopse)
+            .isbn(params.isbn)
+            .urlImagem(params.urlImagem)
+            .autores(params.autores);
+    }
 }
 
 export { Livro };

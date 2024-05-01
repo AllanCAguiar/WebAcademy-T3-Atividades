@@ -6,20 +6,7 @@ import { rotas } from "@/infraestrutura/rotas";
 import cors from "cors";
 import express from "express";
 
-import { join } from "node:path";
-
 const app = express();
-
-// Configurando o diretório de arquivos
-// estáticos da aplicação (.css, .js, .png etc)...
-app.use(
-    express.static(
-        join(
-            process.cwd(),
-            "public"
-        )
-    )
-);
 
 // Configurando o middleware de formatação
 // de entradas JSON, no formato 'application/json'...
