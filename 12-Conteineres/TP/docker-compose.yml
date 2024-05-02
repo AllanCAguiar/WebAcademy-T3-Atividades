@@ -15,12 +15,6 @@ services:
       - ./livros-backend-main/log:/log
     networks:
       - rede_bd
-    healthcheck:
-      test: curl --fail http://localhost:3306 || exit
-      interval: 10s
-      timeout: 10s
-      retries: 3
-      start_period: 0s
 
   frontend:
     container_name: frontend_biblioteca
