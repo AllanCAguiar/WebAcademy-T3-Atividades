@@ -11,6 +11,12 @@ import {
 import { CreateProdutoDto, UpdateProdutoDto } from "./produto.types";
 
 const index = async (req: Request, res: Response) => {
+  /*
+  #swagger.summary = 'Lista todos os produtos.'
+  #swagger.responses[200] = {
+  schema: { $ref: '#/definitions/ListaProdutos' }
+  }
+  */
   const skip = req.query.skip ? parseInt(req.query.skip.toString()) : undefined;
   const take = req.query.take ? parseInt(req.query.take.toString()) : undefined;
   try {
@@ -22,6 +28,16 @@ const index = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
+  /*
+  #swagger.summary = 'Adiciona um novo produto na base.'
+  #swagger.parameters['body'] = {
+  in: 'body',
+  schema: { $ref: '#/definitions/CreateProdutoDto' }
+  }
+  #swagger.responses[200] = {
+  schema: { $ref: '#/definitions/Produto' }
+  }
+  */
   const produto = req.body as CreateProdutoDto;
   try {
     if (await checkNomeIsAvailable(produto.nome)) {
@@ -36,6 +52,13 @@ const create = async (req: Request, res: Response) => {
 };
 
 const read = async (req: Request, res: Response) => {
+  /*
+  #swagger.summary = 'Mostra um produto com base no ID.'
+  #swagger.parameters['id'] = { description: 'ID do produto' }
+  #swagger.responses[200] = {
+  schema: { $ref: '#/definitions/Produto' }
+  }
+  */
   const { id } = req.params;
   try {
     const produto = await readProduto(id);
@@ -48,6 +71,17 @@ const read = async (req: Request, res: Response) => {
 };
 
 const update = async (req: Request, res: Response) => {
+  /*
+  #swagger.summary = 'Modifica os atributos de um produto.'
+  #swagger.parameters['id'] = { description: 'ID do produto' }
+  #swagger.parameters['body'] = {
+  in: 'body',
+  schema: { $ref: '#/definitions/UpdateProdutoDto' }
+  }
+  #swagger.responses[200] = {
+  schema: { $ref: '#/definitions/Produto' }
+  }
+  */
   const { id } = req.params;
   const produto = req.body as UpdateProdutoDto;
   try {
@@ -63,6 +97,10 @@ const update = async (req: Request, res: Response) => {
 };
 
 const remove = async (req: Request, res: Response) => {
+  /*
+  #swagger.summary = 'Apaga um produto com base no ID.'
+  #swagger.parameters['id'] = { description: 'ID do produto' }
+  */
   const { id } = req.params;
   try {
     const deletedProduto = await deleteProduto(id);

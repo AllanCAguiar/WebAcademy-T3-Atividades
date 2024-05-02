@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { v4 as uuidv4 } from "uuid";
 import session from "express-session";
+import swaggerUi from "swagger-ui-express";
+import swaggerFile from "./swagger-output.json";
 import router from "./router";
 import validateEnv from "./utils/validateEnv";
 import setCookieLang from "./middlewares/setLangCookie";
 
 declare module "express-session" {
-  interface SessionData{
+  interface SessionData {
     uid: string;
     tipoUsuarioID: string;
   }
@@ -33,6 +35,7 @@ app.use(setCookieLang);
 app.use(express.json());
 app.use(router);
 
+app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.listen(PORT, () => {
   console.log(`Express app iniciada na porta ${PORT}.`);
 });
