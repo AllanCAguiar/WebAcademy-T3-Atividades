@@ -7,7 +7,7 @@ const changeLanguage = (req: Request, res: Response) => {
   #swagger.summary = 'Troca o idioma da aplicação.'
   #swagger.parameters['body'] = {
   in: 'body',
-  schema: { $ref: '#/definitions/UpdateProdutoDto' }
+  schema: { $ref: '#/definitions/ChangeLangDto' }
   }
   */
   const { lang } = req.body as ChangeLangDto;

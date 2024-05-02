@@ -27,6 +27,14 @@ const doc = {
       createdAt: "2023-11-07T19:27:15.645Z",
       updatedAt: "2023-11-07T19:27:15.645Z",
     },
+    ChangeLangDto: {
+      lang: "pt-BR"
+    },
+    CreateUsuarioDto: {
+      nome: "Allan",
+      email: "aca@gmail.com",
+      senha: "allan123"
+    },
     ListaProdutos: [
       {
         id: "8a2053de-5d92-4c43-97c0-c9b2b0d56703",

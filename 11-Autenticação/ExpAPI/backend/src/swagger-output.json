@@ -147,18 +147,14 @@
         "tags": [
           "Language"
         ],
+        "summary": "Troca o idioma da aplicação.",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "lang": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/ChangeLangDto"
             }
           }
         ],
@@ -185,17 +181,29 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Cria um usuário novo.",
         "description": "",
         "parameters": [
           {
             "name": "tipoUsuario",
+            "description": "ID do produto",
             "in": "query",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateUsuarioDto"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Produto"
+            },
+            "description": "OK"
           }
         }
       }
@@ -360,6 +368,32 @@
         "updatedAt": {
           "type": "string",
           "example": "2023-11-07T19:27:15.645Z"
+        }
+      }
+    },
+    "ChangeLangDto": {
+      "type": "object",
+      "properties": {
+        "lang": {
+          "type": "string",
+          "example": "pt-BR"
+        }
+      }
+    },
+    "CreateUsuarioDto": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Allan"
+        },
+        "email": {
+          "type": "string",
+          "example": "aca@gmail.com"
+        },
+        "senha": {
+          "type": "string",
+          "example": "allan123"
         }
       }
     },
