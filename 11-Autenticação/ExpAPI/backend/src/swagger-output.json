@@ -33,7 +33,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ListaProdutos"
+              "$ref": "#/definitions/Produto"
             },
             "description": "OK"
           }
@@ -170,10 +170,26 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Lista todos os usuário.",
         "description": "",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            },
+            "description": "OK"
           }
         }
       },
@@ -186,7 +202,7 @@
         "parameters": [
           {
             "name": "tipoUsuario",
-            "description": "ID do produto",
+            "description": "ID do usuário",
             "in": "query",
             "type": "string"
           },
@@ -201,7 +217,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/Produto"
+              "$ref": "#/definitions/Usuario"
             },
             "description": "OK"
           }
@@ -213,18 +229,23 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Mostra um usuário com base no ID.",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID do usuário"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            },
+            "description": "OK"
           }
         }
       },
@@ -232,18 +253,30 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Modifica os atributos de um produto.",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID do produto"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateProdutoDto"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Produto"
+            },
+            "description": "OK"
           }
         }
       },
@@ -251,13 +284,15 @@
         "tags": [
           "Usuario"
         ],
+        "summary": "Apaga um usuário com base no ID.",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID do usuário"
           }
         ],
         "responses": {
@@ -397,35 +432,36 @@
         }
       }
     },
-    "ListaProdutos": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "example": "64fa6634-09d9-4684-9b62-76b9bb995997"
-          },
-          "nome": {
-            "type": "string",
-            "example": "Recycled Cotton Chair"
-          },
-          "preco": {
-            "type": "number",
-            "example": 492
-          },
-          "estoque": {
-            "type": "number",
-            "example": 8
-          },
-          "createdAt": {
-            "type": "string",
-            "example": "2024-05-02T02:20:41.165Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "example": "2024-05-02T02:20:41.165Z"
-          }
+    "Usuario": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "446df175-5adc-4290-b084-d6a7be2fbf7d"
+        },
+        "nome": {
+          "type": "string",
+          "example": "Dr. Marion Barrows"
+        },
+        "email": {
+          "type": "string",
+          "example": "Brigitte_Bartoletti@yahoo.com"
+        },
+        "senha": {
+          "type": "string",
+          "example": "$2a$10$w.yG6xAQOiDeDJfMK07p9Oz/q7dXY81D8p4rW0L5KKGhSYZS5CVwS"
+        },
+        "tipoUsuarioID": {
+          "type": "string",
+          "example": "399012f7-a62a-4a67-84de-c77deab96b71"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2024-05-02T02:16:16.190Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2024-05-02T02:16:16.190Z"
         }
       }
     }

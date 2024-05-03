@@ -28,32 +28,22 @@ const doc = {
       updatedAt: "2023-11-07T19:27:15.645Z",
     },
     ChangeLangDto: {
-      lang: "pt-BR"
+      lang: "pt-BR",
     },
     CreateUsuarioDto: {
       nome: "Allan",
       email: "aca@gmail.com",
-      senha: "allan123"
+      senha: "allan123",
     },
-    ListaProdutos: [
-      {
-        id: "8a2053de-5d92-4c43-97c0-c9b2b0d56703",
-        nome: "Bacon",
-        preco: 261,
-        estoque: 1,
-        createdAt: "2023-11-07T19:27:15.645Z",
-        updatedAt: "2023-11-07T19:27:15.645Z",
+    Usuario: {
+        id: "446df175-5adc-4290-b084-d6a7be2fbf7d",
+        nome: "Dr. Marion Barrows",
+        email: "Brigitte_Bartoletti@yahoo.com",
+        senha: "$2a$10$w.yG6xAQOiDeDJfMK07p9Oz/q7dXY81D8p4rW0L5KKGhSYZS5CVwS",
+        tipoUsuarioID: "399012f7-a62a-4a67-84de-c77deab96b71",
+        createdAt: "2024-05-02T02:16:16.190Z",
+        updatedAt: "2024-05-02T02:16:16.190Z",
       },
-      {
-        id: "64fa6634-09d9-4684-9b62-76b9bb995997",
-        nome: "Recycled Cotton Chair",
-        preco: 492,
-        estoque: 8,
-        createdAt: "2024-05-02T02:20:41.165Z",
-        updatedAt: "2024-05-02T02:20:41.165Z",
-      },
-    ],
-
   },
 };
 const outputFile = "./swagger-output.json";

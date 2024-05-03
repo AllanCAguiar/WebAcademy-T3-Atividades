@@ -14,7 +14,7 @@ const index = async (req: Request, res: Response) => {
   /*
   #swagger.summary = 'Lista todos os produtos.'
   #swagger.responses[200] = {
-  schema: { $ref: '#/definitions/ListaProdutos' }
+  schema: { $ref: '#/definitions/Produto' }
   }
   */
   const skip = req.query.skip ? parseInt(req.query.skip.toString()) : undefined;

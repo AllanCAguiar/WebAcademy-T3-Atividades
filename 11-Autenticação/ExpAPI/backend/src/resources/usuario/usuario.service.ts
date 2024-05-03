@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Usuario } from "@prisma/client";
 import { genSalt, hash } from "bcryptjs";
 import { TiposUsuarios } from "../tipoUsuario/tipoUsuario.constants";
 import { CreateUsuarioDto, UsuarioDto, TipoUsuario } from "./usuario.types";
@@ -28,4 +28,26 @@ export const createUsuario = async (
         tipoUsuario === "ADMIN" ? TiposUsuarios.ADMIN : TiposUsuarios.CLIENT,
     },
   });
+};
+
+export const listUsuarios = async (
+  skip?: number,
+  take?: number,
+): Promise<UsuarioDto[]> => {
+  return await prisma.usuario.findMany({ skip, take });
+};
+
+export const readUsuario = async (id: string): Promise<Usuario | null> => {
+  return await prisma.usuario.findUnique({ where: { id } });
+};
+
+export const updateUsuario = async (
+  id: string,
+  usuario: UsuarioDto,
+): Promise<Usuario | null> => {
+  return await prisma.usuario.update({ where: { id }, data: usuario });
+};
+
+export const deleteUsuario = async (id: string): Promise<Usuario> => {
+  return await prisma.usuario.delete({ where: { id } });
 };
