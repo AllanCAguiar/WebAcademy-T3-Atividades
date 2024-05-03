@@ -33,17 +33,22 @@ const doc = {
     CreateUsuarioDto: {
       nome: "Allan",
       email: "aca@gmail.com",
-      senha: "allan123",
+      senha: "admin123",
+    },
+    UpdateUsuarioDto: {
+      nome: "Allan",
+      email: "aca@gmail.com",
+      senha: "admin123",
     },
     Usuario: {
-        id: "446df175-5adc-4290-b084-d6a7be2fbf7d",
-        nome: "Dr. Marion Barrows",
-        email: "Brigitte_Bartoletti@yahoo.com",
-        senha: "$2a$10$w.yG6xAQOiDeDJfMK07p9Oz/q7dXY81D8p4rW0L5KKGhSYZS5CVwS",
-        tipoUsuarioID: "399012f7-a62a-4a67-84de-c77deab96b71",
-        createdAt: "2024-05-02T02:16:16.190Z",
-        updatedAt: "2024-05-02T02:16:16.190Z",
-      },
+      id: "446df175-5adc-4290-b084-d6a7be2fbf7d",
+      nome: "Dr. Marion Barrows",
+      email: "Brigitte_Bartoletti@yahoo.com",
+      senha: "$2a$10$w.yG6xAQOiDeDJfMK07p9Oz/q7dXY81D8p4rW0L5KKGhSYZS5CVwS",
+      tipoUsuarioID: "399012f7-a62a-4a67-84de-c77deab96b71",
+      createdAt: "2024-05-02T02:16:16.190Z",
+      updatedAt: "2024-05-02T02:16:16.190Z",
+    },
   },
 };
 const outputFile = "./swagger-output.json";

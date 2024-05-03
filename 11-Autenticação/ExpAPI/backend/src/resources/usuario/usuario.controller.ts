@@ -1,7 +1,13 @@
 import { Request, Response } from "express";
 import { CreateUsuarioDto, TipoUsuario, UsuarioDto } from "./usuario.types";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { createUsuario, deleteUsuario, listUsuarios, readUsuario, updateUsuario } from "./usuario.service";
+import {
+  createUsuario,
+  deleteUsuario,
+  listUsuarios,
+  readUsuario,
+  updateUsuario,
+} from "./usuario.service";
 
 const index = async (req: Request, res: Response) => {
   /*
@@ -67,7 +73,7 @@ const update = async (req: Request, res: Response) => {
   #swagger.parameters['id'] = { description: 'ID do usuário' }
   #swagger.parameters['body'] = {
   in: 'body',
-  schema: { $ref: '#/definitions/UpdateProdutoDto' }
+  schema: { $ref: '#/definitions/UpdateUsuarioDto' }
   }
   #swagger.responses[200] = {
   schema: { $ref: '#/definitions/Usuario' }
@@ -76,10 +82,8 @@ const update = async (req: Request, res: Response) => {
   const { id } = req.params;
   const produto = req.body as UsuarioDto;
   try {
-    
     const updatedProduto = await updateUsuario(id, produto);
     res.status(StatusCodes.NO_CONTENT).json();
-
   } catch (err) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
   }

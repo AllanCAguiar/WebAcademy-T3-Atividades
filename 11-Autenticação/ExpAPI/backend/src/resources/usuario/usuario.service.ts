@@ -34,11 +34,32 @@ export const listUsuarios = async (
   skip?: number,
   take?: number,
 ): Promise<UsuarioDto[]> => {
-  return await prisma.usuario.findMany({ skip, take });
+  return await prisma.usuario.findMany({
+    select: {
+      id: true,
+      nome: true,
+      email: true,
+      tipoUsuarioID: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+    skip,
+    take,
+  });
 };
 
-export const readUsuario = async (id: string): Promise<Usuario | null> => {
-  return await prisma.usuario.findUnique({ where: { id } });
+export const readUsuario = async (id: string): Promise<UsuarioDto | null> => {
+  return await prisma.usuario.findUnique({
+    select: {
+      id: true,
+      nome: true,
+      email: true,
+      tipoUsuarioID: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+    where: { id },
+  });
 };
 
 export const updateUsuario = async (

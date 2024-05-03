@@ -12,6 +12,7 @@ export const checkCredentials = async (
     where: { email: credentials.email },
   });
   if (!usuario) return null;
+  console.log(usuario.senha, credentials.senha);
   const ok = await compare(credentials.senha, usuario.senha);
   if (!ok) return null;
   return {

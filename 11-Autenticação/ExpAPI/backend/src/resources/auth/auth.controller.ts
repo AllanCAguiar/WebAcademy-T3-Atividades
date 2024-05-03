@@ -7,7 +7,6 @@ import { CreateUsuarioDto } from "../usuario/usuario.types";
 
 const signup = async (req: Request, res: Response) => {
   const usuario = req.body as CreateUsuarioDto;
-
   try {
     const novoUsuario = await createUsuario(usuario, "ADMIN");
     res.status(StatusCodes.CREATED).json(novoUsuario);
