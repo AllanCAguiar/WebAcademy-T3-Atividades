@@ -3,12 +3,13 @@ import { createUsuario } from "../usuario/usuario.service";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { checkCredentials } from "./auth.service";
 import { LoginDto } from "./auth.types";
-import { CreateUsuarioDto } from "../usuario/usuario.types";
+import { CreateUsuarioDto, TipoUsuario } from "../usuario/usuario.types";
 
 const signup = async (req: Request, res: Response) => {
   const usuario = req.body as CreateUsuarioDto;
+  const tipoUsuario = req.query.tipoUsuario as TipoUsuario;
   try {
-    const novoUsuario = await createUsuario(usuario, "ADMIN");
+    const novoUsuario = await createUsuario(usuario, tipoUsuario);
     res.status(StatusCodes.CREATED).json(novoUsuario);
   } catch (err) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

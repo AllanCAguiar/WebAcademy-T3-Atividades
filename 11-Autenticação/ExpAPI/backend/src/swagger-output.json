@@ -7,11 +7,15 @@
   },
   "host": "localhost:9000",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": [
+    "http"
+  ],
   "paths": {
     "/v1/produto/": {
       "get": {
-        "tags": ["Produto"],
+        "tags": [
+          "Produto"
+        ],
         "summary": "Lista todos os produtos.",
         "description": "",
         "parameters": [
@@ -36,7 +40,9 @@
         }
       },
       "post": {
-        "tags": ["Produto"],
+        "tags": [
+          "Produto"
+        ],
         "summary": "Adiciona um novo produto na base.",
         "description": "",
         "parameters": [
@@ -60,7 +66,9 @@
     },
     "/v1/produto/{id}": {
       "get": {
-        "tags": ["Produto"],
+        "tags": [
+          "Produto"
+        ],
         "summary": "Mostra um produto com base no ID.",
         "description": "",
         "parameters": [
@@ -82,7 +90,9 @@
         }
       },
       "put": {
-        "tags": ["Produto"],
+        "tags": [
+          "Produto"
+        ],
         "summary": "Modifica os atributos de um produto.",
         "description": "",
         "parameters": [
@@ -111,7 +121,9 @@
         }
       },
       "delete": {
-        "tags": ["Produto"],
+        "tags": [
+          "Produto"
+        ],
         "summary": "Apaga um produto com base no ID.",
         "description": "",
         "parameters": [
@@ -132,7 +144,9 @@
     },
     "/v1/language/": {
       "post": {
-        "tags": ["Language"],
+        "tags": [
+          "Language"
+        ],
         "summary": "Troca o idioma da aplicação.",
         "description": "",
         "parameters": [
@@ -153,7 +167,9 @@
     },
     "/v1/usuario/": {
       "get": {
-        "tags": ["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "summary": "Lista todos os usuário.",
         "description": "",
         "parameters": [
@@ -178,7 +194,9 @@
         }
       },
       "post": {
-        "tags": ["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "summary": "Cria um usuário novo.",
         "description": "",
         "parameters": [
@@ -208,7 +226,9 @@
     },
     "/v1/usuario/{id}": {
       "get": {
-        "tags": ["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "summary": "Mostra um usuário com base no ID.",
         "description": "",
         "parameters": [
@@ -230,7 +250,9 @@
         }
       },
       "put": {
-        "tags": ["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "summary": "Modifica os atributos de um usuário.",
         "description": "",
         "parameters": [
@@ -259,7 +281,9 @@
         }
       },
       "delete": {
-        "tags": ["Usuario"],
+        "tags": [
+          "Usuario"
+        ],
         "summary": "Apaga um usuário com base no ID.",
         "description": "",
         "parameters": [
@@ -280,8 +304,17 @@
     },
     "/v1/auth/signup": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "tipoUsuario",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -291,7 +324,9 @@
     },
     "/v1/auth/login": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -302,11 +337,66 @@
     },
     "/v1/auth/logout": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/v1/compra/": {
+      "get": {
+        "tags": [
+          "Compra"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Compra"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "quantidade": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
