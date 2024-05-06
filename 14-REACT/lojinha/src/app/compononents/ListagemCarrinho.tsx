@@ -1,12 +1,11 @@
 import ItemCarrinho from "./ItemCarrinho";
 
-const items = [
-  { nome: "Notebook 1", preco: 1500, quantidade: 2 },
-  { nome: "Notebook 1", preco: 1500, quantidade: 2 },
-  { nome: "Notebook 1", preco: 1500, quantidade: 3 },
-];
+interface ListagemCarrinhoProps {
+  itens: ItemCarrinho[];
+  removerItemDoCarrinho: (id: string) => void;
+}
 
-export default function ListagemCarrinho() {
+export default function ListagemCarrinho({ itens, removerItemDoCarrinho }: ListagemCarrinhoProps) {
   return (
     <div className="card mb-4">
       <div className="row card-body">
@@ -23,9 +22,13 @@ export default function ListagemCarrinho() {
               </tr>
             </thead>
             <tbody>
-              {items.map((item) =>
-                ItemCarrinho(item.nome, item.preco, item.quantidade),
-              )}
+              {itens.map((item) => (
+                <ItemCarrinho
+                  key={item.id}
+                  item={item}
+                  removerItemDoCarrinho={removerItemDoCarrinho}
+                />
+              ))}
             </tbody>
           </table>
         </div>

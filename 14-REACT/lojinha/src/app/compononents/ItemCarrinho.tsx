@@ -1,19 +1,22 @@
 const valorTotalProduto = (precoUnitario: number, quantidade: number): number =>
   precoUnitario * quantidade;
 
-export default function ItemCarrinho(
-  nome: string,
-  preco: number,
-  quantidade: number,
-) {
+interface ItemCarrinhoProps {
+  item: ItemCarrinho;
+  removerItemDoCarrinho: (id: string) => void;
+}
+
+export default function ItemCarrinho({ item, removerItemDoCarrinho }: ItemCarrinhoProps) {
   return (
     <tr key="1">
-      <td>{nome}</td>
-      <td>R$ {preco.toFixed(2)}</td>
-      <td>{quantidade}</td>
-      <td>R$ {valorTotalProduto(preco, quantidade).toFixed(2)}</td>
+      <td>{item.nome}</td>
+      <td>R$ {item.preco.toString()}</td>
+      <td>{item.quantidade.toString()}</td>
+      <td>R$ {valorTotalProduto(item.preco, item.quantidade).toFixed(2)}</td>
       <td>
-        <button className="btn btn-danger btn-sm">Remover</button>
+        <button className="btn btn-danger btn-sm" onClick={() => removerItemDoCarrinho(item.id)}>
+          Remover
+        </button>
       </td>
     </tr>
   );
