@@ -62,8 +62,7 @@ const read = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const produto = await readProduto(id);
-    if (!produto)
-      return res.status(StatusCodes.NOT_FOUND).json(ReasonPhrases.NOT_FOUND);
+    if (!produto) return res.status(StatusCodes.NOT_FOUND).json(ReasonPhrases.NOT_FOUND);
     res.status(StatusCodes.OK).json(produto);
   } catch (err) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

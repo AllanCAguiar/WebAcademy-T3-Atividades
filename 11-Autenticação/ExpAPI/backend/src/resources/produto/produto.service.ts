@@ -4,26 +4,18 @@ import { number } from "joi";
 
 const prisma = new PrismaClient();
 
-export const checkNomeIsAvailable = async (
-  nome: string,
-  ignoreID?: string,
-): Promise<boolean> => {
+export const checkNomeIsAvailable = async (nome: string, ignoreID?: string): Promise<boolean> => {
   const produto = await prisma.produto.findUnique({ where: { nome } });
   if (!produto) return true;
   if (ignoreID && produto.id === ignoreID) return true;
   return false;
 };
 
-export const createProduto = async (
-  produto: CreateProdutoDto,
-): Promise<Produto> => {
+export const createProduto = async (produto: CreateProdutoDto): Promise<Produto> => {
   return await prisma.produto.create({ data: produto });
 };
 
-export const listProdutos = async (
-  skip?: number,
-  take?: number,
-): Promise<Produto[]> => {
+export const listProdutos = async (skip?: number, take?: number): Promise<Produto[]> => {
   return await prisma.produto.findMany({ skip, take });
 };
 

@@ -4,10 +4,6 @@ import validateBody from "../../middlewares/validateBody";
 import { languageSchema } from "./language.schemas";
 
 const router = Router();
-router.post(
-  "/",
-  validateBody(languageSchema),
-  languageController.changeLanguage,
-);
+router.post("/", validateBody(languageSchema), languageController.changeLanguage);
 
 export default router;

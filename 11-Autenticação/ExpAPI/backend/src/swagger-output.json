@@ -7,15 +7,11 @@
   },
   "host": "localhost:9000",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/v1/produto/": {
       "get": {
-        "tags": [
-          "Produto"
-        ],
+        "tags": ["Produto"],
         "summary": "Lista todos os produtos.",
         "description": "",
         "parameters": [
@@ -40,9 +36,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Produto"
-        ],
+        "tags": ["Produto"],
         "summary": "Adiciona um novo produto na base.",
         "description": "",
         "parameters": [
@@ -66,9 +60,7 @@
     },
     "/v1/produto/{id}": {
       "get": {
-        "tags": [
-          "Produto"
-        ],
+        "tags": ["Produto"],
         "summary": "Mostra um produto com base no ID.",
         "description": "",
         "parameters": [
@@ -90,9 +82,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Produto"
-        ],
+        "tags": ["Produto"],
         "summary": "Modifica os atributos de um produto.",
         "description": "",
         "parameters": [
@@ -121,9 +111,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Produto"
-        ],
+        "tags": ["Produto"],
         "summary": "Apaga um produto com base no ID.",
         "description": "",
         "parameters": [
@@ -144,9 +132,7 @@
     },
     "/v1/language/": {
       "post": {
-        "tags": [
-          "Language"
-        ],
+        "tags": ["Language"],
         "summary": "Troca o idioma da aplicação.",
         "description": "",
         "parameters": [
@@ -167,9 +153,7 @@
     },
     "/v1/usuario/": {
       "get": {
-        "tags": [
-          "Usuario"
-        ],
+        "tags": ["Usuario"],
         "summary": "Lista todos os usuário.",
         "description": "",
         "parameters": [
@@ -194,9 +178,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Usuario"
-        ],
+        "tags": ["Usuario"],
         "summary": "Cria um usuário novo.",
         "description": "",
         "parameters": [
@@ -226,9 +208,7 @@
     },
     "/v1/usuario/{id}": {
       "get": {
-        "tags": [
-          "Usuario"
-        ],
+        "tags": ["Usuario"],
         "summary": "Mostra um usuário com base no ID.",
         "description": "",
         "parameters": [
@@ -250,9 +230,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Usuario"
-        ],
+        "tags": ["Usuario"],
         "summary": "Modifica os atributos de um usuário.",
         "description": "",
         "parameters": [
@@ -281,9 +259,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Usuario"
-        ],
+        "tags": ["Usuario"],
         "summary": "Apaga um usuário com base no ID.",
         "description": "",
         "parameters": [
@@ -304,42 +280,62 @@
     },
     "/v1/auth/signup": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
+        "summary": "Cria um usuário.",
         "description": "",
         "parameters": [
           {
             "name": "tipoUsuario",
+            "description": "Tipo do usuário",
             "in": "query",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateUsuarioDto"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            },
+            "description": "OK"
           }
         }
       }
     },
     "/v1/auth/login": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
+        "summary": "Faz a sessão do usuário.",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LoginDto"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/UsuarioDto"
+            },
+            "description": "OK"
           }
         }
       }
     },
     "/v1/auth/logout": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
+        "summary": "Desfazer a sessão do usuário.",
         "description": "",
         "responses": {
           "default": {
@@ -350,53 +346,139 @@
     },
     "/v1/compra/": {
       "get": {
-        "tags": [
-          "Compra"
-        ],
+        "tags": ["Compra"],
+        "summary": "Lista os produtos no carrinho.",
         "description": "",
-        "parameters": [
-          {
-            "name": "skip",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "take",
-            "in": "query",
-            "type": "string"
-          }
-        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CompraDto"
+            },
+            "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/v1/compra/finish/": {
       "post": {
-        "tags": [
-          "Compra"
-        ],
+        "tags": ["Compra"],
+        "summary": "Finaliza a compra e salva os itens comprados no banco de dados.",
+        "description": "",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Compra"
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/compra/{produtoID}": {
+      "post": {
+        "tags": ["Compra"],
+        "summary": "Adiciona um item no carrinho.",
         "description": "",
         "parameters": [
+          {
+            "name": "produtoID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do produto"
+          },
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "quantidade": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/QuantidadeCompra"
             }
           }
         ],
         "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CompraDto"
+            },
+            "description": "OK"
+          },
           "400": {
             "description": "Bad Request"
           },
           "401": {
             "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/compra/{compraID}": {
+      "get": {
+        "tags": ["Compra"],
+        "summary": "Mostra uma compra no carrinho com base no id da compra.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "compraID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da compra"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CompraDto"
+            },
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Compra"],
+        "summary": "Atualiza um item no carrinho.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "compraID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da compra"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/QuantidadeCompra"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CompraDto"
+            },
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Compra"],
+        "summary": "Remove um item do carrinho.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "compraID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da compra"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }
@@ -509,6 +591,15 @@
         }
       }
     },
+    "QuantidadeCompra": {
+      "type": "object",
+      "properties": {
+        "quantidade": {
+          "type": "number",
+          "example": 2
+        }
+      }
+    },
     "Usuario": {
       "type": "object",
       "properties": {
@@ -539,6 +630,69 @@
         "updatedAt": {
           "type": "string",
           "example": "2024-05-02T02:16:16.190Z"
+        }
+      }
+    },
+    "CompraDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "0b86ebc5-b012-46dd-9081-2896556eaabb"
+        },
+        "usuarioID": {
+          "type": "string",
+          "example": "0b4600b5-68cf-40fa-9af0-d5f9a7e0d410"
+        },
+        "produtoID": {
+          "type": "string",
+          "example": "9eebd43e-8feb-4306-bdaf-2887814a9c62"
+        },
+        "quantidade": {
+          "type": "number",
+          "example": 4
+        }
+      }
+    },
+    "Compra": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "0b86ebc5-b012-46dd-9081-2896556eaabb"
+        },
+        "usuarioID": {
+          "type": "string",
+          "example": "0b4600b5-68cf-40fa-9af0-d5f9a7e0d410"
+        },
+        "produtoID": {
+          "type": "string",
+          "example": "9eebd43e-8feb-4306-bdaf-2887814a9c62"
+        },
+        "quantidade": {
+          "type": "number",
+          "example": 4
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2024-05-06T04:49:55.331Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2024-05-06T04:49:55.331Z"
+        }
+      }
+    },
+    "LoginDto": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "Richie74@yahoo.com"
+        },
+        "senha": {
+          "type": "string",
+          "example": "admin123"
         }
       }
     }

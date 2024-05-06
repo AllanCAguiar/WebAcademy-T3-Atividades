@@ -24,16 +24,12 @@ export const createUsuario = async (
     data: {
       ...usuario,
       senha: senha,
-      tipoUsuarioID:
-        tipoUsuario === "ADMIN" ? TiposUsuarios.ADMIN : TiposUsuarios.CLIENT,
+      tipoUsuarioID: tipoUsuario === "ADMIN" ? TiposUsuarios.ADMIN : TiposUsuarios.CLIENT,
     },
   });
 };
 
-export const listUsuarios = async (
-  skip?: number,
-  take?: number,
-): Promise<UsuarioDto[]> => {
+export const listUsuarios = async (skip?: number, take?: number): Promise<UsuarioDto[]> => {
   return await prisma.usuario.findMany({
     select: {
       id: true,
@@ -62,10 +58,7 @@ export const readUsuario = async (id: string): Promise<UsuarioDto | null> => {
   });
 };
 
-export const updateUsuario = async (
-  id: string,
-  usuario: UsuarioDto,
-): Promise<Usuario | null> => {
+export const updateUsuario = async (id: string, usuario: UsuarioDto): Promise<Usuario | null> => {
   return await prisma.usuario.update({ where: { id }, data: usuario });
 };
 

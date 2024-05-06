@@ -6,6 +6,17 @@ import { LoginDto } from "./auth.types";
 import { CreateUsuarioDto, TipoUsuario } from "../usuario/usuario.types";
 
 const signup = async (req: Request, res: Response) => {
+  /*
+  #swagger.summary = 'Cria um usuário.'
+   #swagger.parameters['tipoUsuario'] = { description: 'Tipo do usuário' }
+  #swagger.parameters['body'] = {
+  in: 'body',
+  schema: { $ref: '#/definitions/CreateUsuarioDto' }
+  }
+  #swagger.responses[200] = {
+  schema: { $ref: '#/definitions/Usuario' }
+  }
+  */
   const usuario = req.body as CreateUsuarioDto;
   const tipoUsuario = req.query.tipoUsuario as TipoUsuario;
   try {
@@ -17,13 +28,20 @@ const signup = async (req: Request, res: Response) => {
 };
 
 const login = async (req: Request, res: Response) => {
+  /*
+  #swagger.summary = 'Faz a sessão do usuário.'
+  #swagger.parameters['body'] = {
+    in: 'body',
+    schema: { $ref: '#/definitions/LoginDto' }
+  }
+  #swagger.responses[200] = {
+  schema: { $ref: '#/definitions/UsuarioDto' }
+  }
+  */
   const credentials = req.body as LoginDto;
   try {
     const usuario = await checkCredentials(credentials);
-    if (!usuario)
-      return res
-        .status(StatusCodes.UNAUTHORIZED)
-        .json(ReasonPhrases.UNAUTHORIZED);
+    if (!usuario) return res.status(StatusCodes.UNAUTHORIZED).json(ReasonPhrases.UNAUTHORIZED);
     req.session.uid = usuario.id;
     req.session.tipoUsuarioID = usuario.tipoUsuarioID;
     res.status(StatusCodes.OK).json(usuario);
@@ -31,11 +49,13 @@ const login = async (req: Request, res: Response) => {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
   }
 };
+
 const logout = async (req: Request, res: Response) => {
+  /*
+  #swagger.summary = 'Desfazer a sessão do usuário.'
+  */
   if (req.session.uid) {
-    req.session.destroy(() =>
-      res.status(StatusCodes.OK).json(ReasonPhrases.OK),
-    );
+    req.session.destroy(() => res.status(StatusCodes.OK).json(ReasonPhrases.OK));
   } else {
     res.status(StatusCodes.UNAUTHORIZED).json(ReasonPhrases.UNAUTHORIZED);
   }

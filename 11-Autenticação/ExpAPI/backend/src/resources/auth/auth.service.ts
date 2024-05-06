@@ -5,14 +5,11 @@ import { compare } from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-export const checkCredentials = async (
-  credentials: LoginDto,
-): Promise<UsuarioDto | null> => {
+export const checkCredentials = async (credentials: LoginDto): Promise<UsuarioDto | null> => {
   const usuario = await prisma.usuario.findUnique({
     where: { email: credentials.email },
   });
   if (!usuario) return null;
-  console.log(usuario.senha, credentials.senha);
   const ok = await compare(credentials.senha, usuario.senha);
   if (!ok) return null;
   return {
