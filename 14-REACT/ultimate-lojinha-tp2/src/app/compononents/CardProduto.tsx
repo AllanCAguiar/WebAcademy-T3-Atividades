@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface CardProdutoProps {
   produto: Produto;
@@ -6,6 +7,10 @@ interface CardProdutoProps {
 }
 
 export default function CardProduto({ produto, adicionarAoCarrinho }: CardProdutoProps) {
+  const router = useRouter();
+  const verDetalhesProduto = (produto: string) => {
+    router.push(`/produto/${produto}`)
+  }
   return (
     <div className="col">
       <div className="card shadow-sm h-100">
@@ -25,6 +30,9 @@ export default function CardProduto({ produto, adicionarAoCarrinho }: CardProdut
             onClick={() => adicionarAoCarrinho(produto)}
           >
             Adicionar no carrinho
+          </button>
+          <button className="btn btn-light d-block w-100 mt-2" type="button" onClick={() => verDetalhesProduto(produto.id)}>
+            Ver detalhes
           </button>
         </div>
       </div>
