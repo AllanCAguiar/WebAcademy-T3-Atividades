@@ -32,7 +32,7 @@ export default function Produtos() {
       <main>
         <div className="container p-5">
           <ResumoCarrinho quantItens={quantItens} precoTotal={precoTotal} />
-          <ListagemProdutos produtos={produtos} adicionarAoCarrinho={adicionarAoCarrinho} />
+          <ListagemProdutos adicionarAoCarrinho={adicionarAoCarrinho} />
         </div>
       </main>
     </>

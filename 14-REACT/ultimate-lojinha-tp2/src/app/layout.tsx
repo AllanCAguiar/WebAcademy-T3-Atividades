@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./compononents/Navbar";
 import BootstrapClient from "./compononents/BootstrapClient";
+import { ReactQueryClientProvider } from "./compononents/ReactQueryClient";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {" "}
-        <Navbar /> {children} <BootstrapClient />{" "}
+        <Navbar />{" "}
+        <ReactQueryClientProvider>
+          {" "}
+          {children} <BootstrapClient />{" "}
+        </ReactQueryClientProvider>{" "}
       </body>
     </html>
   );
