@@ -30,7 +30,12 @@ export default function ItemCarrinho({ item, dispatch }: ItemCarrinhoProps) {
       </td>
       <td>R$ {valorTotalProduto(item.preco, item.quantidade).toFixed(2)}</td>
       <td>
-        <button className="btn btn-danger btn-sm">Remover</button>
+        <button
+          className="btn btn-danger btn-sm"
+          onClick={() => dispatch({ type: "remover", id: item.id })}
+        >
+          Remover
+        </button>
       </td>
     </tr>
   );

@@ -13,19 +13,34 @@ export type Action =
   | { type: "diminuir_qtd"; id: string }
   | { type: "remover"; id: string };
 
-function reducer(state: State, action: Action) {
+function reducer(state: State, action: Action): State {
   switch (action.type) {
     case "aumentar_qtd":
-      var index = state.itensNoCarrinho.findIndex((item) => item.id == action.id);
-      state.itensNoCarrinho[index].quantidade++;
-      return { ...state };
-    case "diminuir_qtd":
-      console.log("TESTE");
-      var index = state.itensNoCarrinho.findIndex((item) => item.id == action.id);
-      state.itensNoCarrinho[index].quantidade--;
-      return { ...state };
-    case "remover":
+      return {
+        ...state,
+        itensNoCarrinho: state.itensNoCarrinho.map((item) => {
+          if (item.id === action.id) {
+            return { ...item, quantidade: item.quantidade++ };
+          }
+          return item;
+        }),
+      };
 
+    case "diminuir_qtd":
+      return {
+        ...state,
+        itensNoCarrinho: state.itensNoCarrinho.map((item) => {
+          if (item.id === action.id && item.quantidade > 0) {
+            return { ...item, quantidade: item.quantidade-- };
+          }
+          return item;
+        }),
+      };
+    case "remover":
+      return {
+        ...state,
+        itensNoCarrinho: state.itensNoCarrinho.filter((item) => item.id !== action.id),
+      };
     default:
       throw new Error();
   }
@@ -36,7 +51,7 @@ export default function Carrinho() {
 
   let temp_preco = 0,
     temp_quant = 0;
-  state.itensNoCarrinho.map((item) => {
+  state.itensNoCarrinho.map((item: ItemCarrinho) => {
     temp_quant += item.quantidade;
     temp_preco += item.preco * item.quantidade;
   });
