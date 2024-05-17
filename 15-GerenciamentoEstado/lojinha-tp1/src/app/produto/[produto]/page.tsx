@@ -1,10 +1,8 @@
 "use client";
 
 import { useDetalhesProdutos } from "@/app/hooks/useDetalhesProdutos";
-import api from "@/app/services/api";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function Produto() {
   const params = useParams();
@@ -25,13 +23,9 @@ export default function Produto() {
               <h5 className="card-title mb-4 fw-bold">{produto.nome}</h5>
 
               <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 mb-3">
-                <Image
-                  key={""}
-                  src={produto.fotos[0].src}
-                  alt={produto.fotos[0].titulo}
-                  width={300}
-                  height={320}
-                />
+                {produto.fotos.map((foto) => (
+                  <Image key={""} src={foto.src} alt={foto.titulo} width={300} height={320} />
+                ))}
               </div>
 
               <p className="card-text fw-medium">Valor: R${Number(produto.preco).toFixed(2)}</p>

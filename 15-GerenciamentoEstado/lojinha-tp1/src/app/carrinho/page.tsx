@@ -1,5 +1,5 @@
 "use client";
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import ResumoCarrinho from "../compononents/ResumoCarrinho";
 import ListagemCarrinho from "../compononents/ListagemCarrinho";
 import { mockItensCarrinho } from "../mocks/itensCarrinho";
@@ -57,6 +57,21 @@ export default function Carrinho() {
   });
   const [precoTotal, setPrecoTotal] = useState<number>(temp_preco);
   const [quantItens, setQuantItens] = useState<number>(temp_quant);
+
+  const handleUpdate = () => {
+    let novoPreco = 0,
+      novaQuantidade = 0;
+    state.itensNoCarrinho.forEach((item: ItemCarrinho) => {
+      novaQuantidade += item.quantidade;
+      novoPreco += item.preco * item.quantidade;
+    });
+    setPrecoTotal(novoPreco);
+    setQuantItens(novaQuantidade);
+  };
+
+  useEffect(() => {
+    handleUpdate();
+  }, [state.itensNoCarrinho]);
 
   return (
     <>

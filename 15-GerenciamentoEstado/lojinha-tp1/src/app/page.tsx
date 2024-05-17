@@ -1,11 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ResumoCarrinho from "./compononents/ResumoCarrinho";
 import ListagemProdutos from "./compononents/ListagemProdutos";
 
 export default function Produtos() {
-
-
   const [precoTotal, setPrecoTotal] = useState<number>(0);
   const [quantItens, setQuantItens] = useState<number>(0);
 

@@ -1,5 +1,3 @@
-import { useQuery } from "react-query";
-import api from "../services/api";
 import CardProduto from "./CardProduto";
 import { useListaProdutos } from "../hooks/useListaProdutos";
 
