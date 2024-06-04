@@ -28,7 +28,7 @@ describe("CardProduto", () => {
 
     render(
       <FavoritosProvider>
-        <CardProduto produto={produtoMockado} setFavoritos={() => {}} />
+        <CardProduto produto={mockProdutos[0]} setFavoritos={() => {}} />
       </FavoritosProvider>
     );
 
