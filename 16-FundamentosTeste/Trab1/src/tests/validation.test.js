@@ -28,9 +28,15 @@ describe("firstName()", () => {
         const result = firstName(fullName);
         expect(result).toBe("Arthur")
     });
+
+    it("Deve retornar o primeiro nome corretamente quando tiver mais de 2 nomes", () => {
+        const fullName = "Arthur Morgan II";
+        const result = firstName(fullName);
+        expect(result).toBe("Arthur")
+    });
 });
 
-describe("veriverifyStockAvailability()", () => {
+describe("verifyStockAvailability()", () => {
     it("Deve retornar falso para um produto que não existe", () =>{
         const name = "bicycle"
         const result = verifyStockAvailability(name,)
@@ -39,10 +45,10 @@ describe("veriverifyStockAvailability()", () => {
     it("Deve retornar falso para um produto fora de estoque", () =>{
         const name = "book"
         const result = verifyStockAvailability(name, )
-        expect(result).toBeTruthy()
+        expect(result).toBeFalsy()
     });
     it("Deve retornar verdadeiro para um produto que está no estoque", () =>{
-        const name = "bicycle"
+        const name = "laptop"
         const result = verifyStockAvailability(name, )
         expect(result).toBeTruthy()
     });
@@ -51,9 +57,9 @@ describe("veriverifyStockAvailability()", () => {
 describe("calculateTotalPrice()", () => {
     it("Deve retornar a soma dos preços dos produtos", () =>{
         const products = [
-                 { name: 'Product 1', price: 0, quantity: 2 },
-                 { name: 'Product 2', price: 0, quantity: 2 },
-                 { name: 'Product 3', price: 0, quantity: 1 }
+                 { name: 'Product 1', price: 10, quantity: 2 },
+                 { name: 'Product 2', price: 20, quantity: 2 },
+                 { name: 'Product 3', price: 30, quantity: 1 }
                 ]
         let soma = 0
         for(let i = 0; i<products.length; i++){
@@ -61,6 +67,5 @@ describe("calculateTotalPrice()", () => {
         }
         const result = calculateTotalPrice(products)
         expect(result).toBe(soma)
-
     });
 });
